@@ -31,7 +31,8 @@ a{color:inherit}
 }
 .brand{display:flex;gap:12px;align-items:center}
 .logo{
-  width:44px;height:44px;border-radius:14px;
+  width: 50px;
+  height: auto;
   background: linear-gradient(135deg, var(--accent), var(--accent2));
   box-shadow: 0 10px 25px rgba(124,92,255,.25);
 }
