@@ -1,0 +1,31 @@
+{
+  "videos": [
+    {
+      "id": "1",
+      "title": "DJI Mini 4 Pro Introduction",
+      "youtubeUrl": "https://www.youtube.com/watch?v=0b4iQ9kVQeA",
+      "category": "Produk",
+      "tags": ["drone","dji"],
+      "description": "Official intro video DJI Mini 4 Pro.",
+      "isPublished": true
+    },
+    {
+      "id": "2",
+      "title": "Agriculture Drone Spraying Demo",
+      "youtubeUrl": "https://www.youtube.com/watch?v=QwZT7T-TXT0",
+      "category": "Demo",
+      "tags": ["agriculture","spraying"],
+      "description": "Drone spraying demonstration.",
+      "isPublished": true
+    },
+    {
+      "id": "3",
+      "title": "Internal Training Sample",
+      "youtubeUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "category": "Internal",
+      "tags": ["training"],
+      "description": "Unpublished example.",
+      "isPublished": false
+    }
+  ]
+}

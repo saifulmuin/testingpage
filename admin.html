@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Admin</title>
+<style>
+body{font-family:system-ui;background:#0f1115;color:#fff;margin:0;padding:20px}
+input,textarea{width:100%;padding:8px;margin-bottom:8px;background:#141824;border:1px solid #2a3246;color:#fff}
+button{padding:8px 12px;background:#141824;border:1px solid #2a3246;color:#fff;margin-right:6px;cursor:pointer}
+table{width:100%;margin-top:20px;border-collapse:collapse}
+td,th{border-bottom:1px solid #333;padding:6px}
+</style>
+</head>
+<body>
+
+<div style="display:flex;align-items:center;gap:12px;">
+  <h2 style="margin:0;">Admin Video Gallery</h2>
+  <a href="./index.html" 
+     style="color:#fff;text-decoration:none;
+            border:1px solid #2a3246;
+            padding:6px 12px;
+            border-radius:8px;
+            background:#141824;">
+    ← Back to Landing
+  </a>
+</div>
+
+<input id="title" placeholder="Title">
+<input id="youtubeUrl" placeholder="YouTube URL">
+<input id="category" placeholder="Category">
+<input id="tags" placeholder="Tags comma separated">
+<textarea id="description" placeholder="Description"></textarea>
+<label><input type="checkbox" id="published" checked> Published</label>
+<br><br>
+<button onclick="saveVideo()">Save</button>
+<button onclick="exportJson()">Export videos.json</button>
+<button onclick="loadFromRepo()">Load from repo</button>
+<input type="file" id="importFile" accept="application/json">
+
+<table>
+<thead><tr><th>Title</th><th>Category</th><th>Actions</th></tr></thead>
+<tbody id="list"></tbody>
+</table>
+
+<script>
+const LS="video_gallery_db";
+let db={videos:[]};
+let editing=null;
+
+function loadLocal(){
+  const raw=localStorage.getItem(LS);
+  if(raw) db=JSON.parse(raw);
+}
+function saveLocal(){
+  localStorage.setItem(LS,JSON.stringify(db,null,2));
+}
+function render(){
+  document.getElementById("list").innerHTML=db.videos.map(v=>`
+    <tr>
+      <td>${v.title}</td>
+      <td>${v.category||""}</td>
+      <td>
+        <button onclick="edit('${v.id}')">Edit</button>
+        <button onclick="del('${v.id}')">Delete</button>
+      </td>
+    </tr>
+  `).join("");
+}
+function saveVideo(){
+  const v={
+    id: editing||Date.now().toString(),
+    title:title.value,
+    youtubeUrl:youtubeUrl.value,
+    category:category.value,
+    tags:tags.value.split(",").map(x=>x.trim()).filter(Boolean),
+    description:description.value,
+    isPublished:published.checked
+  };
+  const i=db.videos.findIndex(x=>x.id===v.id);
+  if(i>=0) db.videos[i]=v; else db.videos.unshift(v);
+  saveLocal();
+  render();
+  editing=null;
+  document.querySelectorAll("input,textarea").forEach(e=>e.value="");
+}
+function edit(id){
+  const v=db.videos.find(x=>x.id===id);
+  editing=id;
+  title.value=v.title;
+  youtubeUrl.value=v.youtubeUrl;
+  category.value=v.category;
+  tags.value=v.tags.join(",");
+  description.value=v.description;
+  published.checked=v.isPublished;
+}
+function del(id){
+  db.videos=db.videos.filter(x=>x.id!==id);
+  saveLocal(); render();
+}
+function exportJson(){
+  const blob=new Blob([JSON.stringify(db,null,2)],{type:"application/json"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="videos.json";
+  a.click();
+}
+async function loadFromRepo(){
+  const res=await fetch("./videos.json",{cache:"no-store"});
+  const data=await res.json();
+  db=Array.isArray(data)?{videos:data}:{videos:data.videos||[]};
+  saveLocal(); render();
+}
+importFile.onchange=e=>{
+  const r=new FileReader();
+  r.onload=()=>{
+    const data=JSON.parse(r.result);
+    db=Array.isArray(data)?{videos:data}:{videos:data.videos||[]};
+    saveLocal(); render();
+  };
+  r.readAsText(e.target.files[0]);
+};
+
+loadLocal();
+render();
+</script>
+</body>
+</html>
