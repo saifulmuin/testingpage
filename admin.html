@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin — YouTube Gallery JSON Builder</title>
+  <link rel="stylesheet" href="./assets/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <section class="header">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div class="hgroup">
+          <h1>Admin Page — JSON Builder</h1>
+          <p>
+            Buat / edit / delete item, kemudian <b>Export</b> jadi <span class="kbd">data.json</span>.
+            Data draft disimpan dalam <span class="kbd">localStorage</span> (auto-save).
+          </p>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <button id="newBtn" class="btn ghost">New</button>
+        <button id="exportBtn" class="btn primary">Export data.json</button>
+        <label class="btn ghost" style="display:inline-flex;gap:8px;align-items:center;cursor:pointer">
+          Import JSON
+          <input id="importFile" type="file" accept="application/json" style="display:none" />
+        </label>
+        <button id="loadSampleBtn" class="btn ghost">Load sample (optional)</button>
+        <button id="clearAllBtn" class="btn danger">Clear All</button>
+      </div>
+    </section>
+
+    <section class="form">
+      <header>
+        <h2>Form (<span id="mode">New</span>)</h2>
+        <div class="toolbar">
+          <button id="saveBtn" class="btn primary">Save</button>
+          <button id="deleteBtn" class="btn danger">Delete item</button>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="field">
+          <div class="label">ID (auto)</div>
+          <input id="id" class="input" placeholder="auto-generated" readonly />
+          <div class="help">ID akan auto bila save. Boleh kekalkan untuk link stable.</div>
+        </div>
+
+        <div class="field">
+          <div class="label">Tarikh (YYYY-MM-DD)</div>
+          <input id="created_at" class="input" placeholder="2026-03-02" />
+          <div class="help">Untuk sorting/newest di gallery.</div>
+        </div>
+
+        <div class="field full">
+          <div class="label">Title *</div>
+          <input id="title" class="input" placeholder="Contoh: Demo Mist Nex 20L" />
+        </div>
+
+        <div class="field full">
+          <div class="label">YouTube Link (Unlisted) *</div>
+          <input id="youtube_url" class="input" placeholder="https://www.youtube.com/watch?v=..." />
+          <div class="help">Status: <span class="kbd" id="yt_status">-</span> (auto check video ID).</div>
+        </div>
+
+        <div class="field">
+          <div class="label">Tags (comma)</div>
+          <input id="tags" class="input" placeholder="mist, demo, padi" />
+        </div>
+
+        <div class="field" style="align-items:flex-start">
+          <label style="display:flex;gap:10px;align-items:center;margin-top:26px">
+            <input id="featured" type="checkbox" />
+            <span class="label" style="margin:0">Featured</span>
+          </label>
+          <div class="help">Featured akan muncul dulu di gallery (sort featured).</div>
+        </div>
+
+        <div class="field full">
+          <div class="label">Description</div>
+          <textarea id="description" class="input" placeholder="Ringkas tapi jelas..."></textarea>
+        </div>
+      </div>
+    </section>
+
+    <section class="table">
+      <header>
+        <h2>Items List</h2>
+        <div class="toolbar">
+          <input id="search" class="input" placeholder="Search..." />
+          <select id="filter_tag" class="select">
+            <option value="">Semua tag</option>
+          </select>
+          <select id="filter_feat" class="select">
+            <option value="">Semua</option>
+            <option value="featured">Featured sahaja</option>
+          </select>
+          <span id="count" class="badge">0 item</span>
+        </div>
+      </header>
+      <div id="rows" class="rows"></div>
+    </section>
+
+    <div class="notice">
+      Flow: <span class="kbd">admin.html (local)</span> → <span class="kbd">Export data.json</span> →
+      upload replace <span class="kbd">data.json</span> dalam repo → view <span class="kbd">gallery.html</span>.
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="./assets/admin.js"></script>
+</body>
+</html>

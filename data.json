@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "generated_at": "2026-03-02 06:11:18",
+  "items": [
+    {
+      "id": "vid-6b06bbb9",
+      "title": "Demo 1 — Mist Nex 20L (Unlisted)",
+      "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "description": "Contoh video unlisted. Tukar kepada link YouTube sebenar anda.",
+      "tags": [
+        "demo",
+        "mist",
+        "nex20"
+      ],
+      "created_at": "2026-03-02",
+      "featured": true
+    },
+    {
+      "id": "vid-f3ce76b4",
+      "title": "Demo 2 — Aerial Survey (Unlisted)",
+      "youtube_url": "https://youtu.be/9bZkp7q19f0",
+      "description": "Contoh kedua. Anda boleh tambah banyak item.",
+      "tags": [
+        "survey",
+        "mapping"
+      ],
+      "created_at": "2026-03-02",
+      "featured": false
+    }
+  ]
+}
