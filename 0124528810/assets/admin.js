@@ -65,6 +65,7 @@
       extra_links: Array.isArray(it.extra_links) ? it.extra_links.filter(x=>x && x.url).map(x=>({label:String(x.label||'Link'), url:String(x.url)})) : [],
       tags: Array.isArray(it.tags) ? it.tags.map(String).filter(Boolean) : [],
       created_at: String(it.created_at || ''),
+      priority: Number(it.priority ?? 9999),
       featured: !!it.featured
     }));
   }
@@ -198,6 +199,7 @@
     $('#title').value = it?.title || '';
     $('#youtube_url').value = it?.youtube_url || '';
     $('#created_at').value = it?.created_at || new Date().toISOString().slice(0,10);
+    $('#priority').value = String(it?.priority ?? '');
     $('#featured').checked = !!it?.featured;
     $('#tags').value = (it?.tags || []).join(', ');
     $('#description').value = it?.description || '';
@@ -234,6 +236,7 @@
       extra_links: parseExtraLinks($('#extra_links').value||''),
       tags,
       created_at: ($('#created_at').value||'').trim(),
+      priority: Number((($('#priority').value||'').trim()) || 9999),
       featured: $('#featured').checked
     };
   }
@@ -293,7 +296,7 @@
       row.innerHTML = `
         <div>
           <div><strong>${sanitize(it.title || '(untitled)')}</strong></div>
-          <div class="pill">${sanitize(it.category || '-')} • ${sanitize(it.created_at || '-')}</div>
+          <div class="pill">${sanitize(it.category || '-')} • P:${sanitize(it.priority ?? '-')} • ${sanitize(it.created_at || '-')}</div>
         </div>
         <div class="hide-sm">
           <div class="pill">${ok?'YouTube OK':'Link invalid'}</div>
