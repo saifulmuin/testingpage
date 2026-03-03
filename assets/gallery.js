@@ -107,23 +107,16 @@
             <h3 class="title">${sanitize(item.title || 'Untitled')}</h3>
             <div class="meta">
               ${featured ? `<span class="badge">⭐ Featured</span>` : ``}
-              ${item.created_at ? `<span class="pill">${sanitize(item.created_at)}</span>` : ``}
-              ${item.category ? `<span class="pill">${sanitize(item.category)}</span>` : ``}
-            </div>
+                                        </div>
             <p class="desc">${sanitize(item.description || '')}</p>
             <div class="tags">
               ${tags.slice(0,6).map(t=>`<span class="tag">${sanitize(t)}</span>`).join('')}
             </div>
           </div>
-          <div class="footer">
-            <span class="small">${yid ? 'YouTube' : 'Link tidak sah'}</span>
-            <button class="btn sm primary playbtn">Play</button>
-          </div>
         `;
         const open = ()=>openModal(item);
         card.querySelector('.thumb').addEventListener('click', open);
         card.querySelector('.thumb').addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') open(); });
-        card.querySelector('.playbtn').addEventListener('click', open);
         scroller.appendChild(card);
       }
 
