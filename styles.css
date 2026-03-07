@@ -22,12 +22,17 @@ body{
   color:var(--text);
 }
 a{color:inherit}
-.container{max-width:1180px;margin:0 auto;padding:22px}
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:0 1rem;
+}
 .header{
   display:flex;gap:14px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;
   padding:18px 18px 10px;border:1px solid var(--line);border-radius:var(--radius);
   background: linear-gradient(180deg, rgba(18,26,51,.85), rgba(15,23,48,.65));
   box-shadow: var(--shadow);
+  width:100%;
 }
 .brand{display:flex;gap:12px;align-items:center}
 .logo{
@@ -36,9 +41,13 @@ a{color:inherit}
   background: linear-gradient(135deg, var(--accent), var(--accent2));
   box-shadow: 0 10px 25px rgba(124,92,255,.25);
 }
-.hgroup h1{margin:0;font-size:1.1rem;letter-spacing:.2px}
+.hgroup h1{
+  margin:80px 0 0 0; /* top right bottom left */
+  font-size:1.1rem;
+  letter-spacing:.2px;
+}
 .hgroup p{margin:4px 0 0;color:var(--muted);font-size:.92rem;max-width:720px}
-.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;width:900px;margin:auto}
 .input, .select, .btn{
   border:1px solid var(--line);background:rgba(10,14,28,.35);color:var(--text);
   border-radius:14px;padding:10px 12px;font-size:.95rem;outline:none;
@@ -72,8 +81,7 @@ a{color:inherit}
   background: rgba(255,255,255,.06);
   color: rgba(233,236,255,.95);
 }
-.hero-content {
-  max-width: 900px;   /* matches your layout */
+.hero-content {     /* matches your layout */
   margin: 0 auto;     /* center the block */
   padding: 0 1rem;    /* small side padding for mobile */
 }
