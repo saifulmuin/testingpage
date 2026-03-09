@@ -80,8 +80,10 @@ a{color:inherit;text-decoration:none}
 }
 
 .hero-content{
-  width:100%
+  width:100%;
   max-width:none;
+  margin:0;
+  padding:0;
 }
 .hgroup h1{
   margin:0;
@@ -97,17 +99,20 @@ a{color:inherit;text-decoration:none}
 }
 
 .intro{
+  width:100%;
+  max-width:none;
   margin-top:24px;
   line-height:1.85;
   font-size:1.02rem;
   color:var(--text);
+  text-align:left;
 }
 
 .toolbar{
   width:100%;
+  max-width:none;
   margin:0 0 26px;
 }
-
 .input, .select, .btn{
   border:1px solid var(--line);
   background:var(--input-bg);
@@ -173,14 +178,17 @@ body.light .theme-btn{
 
 .notice{
   width:100%;
+  max-width:none;
   margin:26px 0 0;
 }
 
 /* Sections */
 .section{
   width:100%;
+  max-width:none;
   margin:0 0 26px;
 }
+
 
 .section-head{
   display:flex;
