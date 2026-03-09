@@ -43,8 +43,8 @@
         <option value="title">Sort: Title (A-Z)</option>
         <option value="priority">Sort: Priority (Admin)</option>
       </select>
-      <button id="themeToggle" class="btn">🌙 Dark</button>
-<span id="count" class="badge">0 video</span>
+      <button id="themeToggle" class="btn theme-btn" type="button" aria-label="Toggle theme">☀️ Light</button>
+      <span id="count" class="badge">0 video</span>
     </div>
 
     <!-- Video Sections -->
@@ -76,31 +76,31 @@
 
   <script src="gallery.js"></script>
   <script>
+    const themeToggle = document.getElementById("themeToggle");
 
-const toggle = document.getElementById("themeToggle");
+    function setTheme(mode) {
+      if (mode === "light") {
+        document.body.classList.add("light");
+        themeToggle.textContent = "🌙 Dark";
+        localStorage.setItem("theme", "light");
+      } else {
+        document.body.classList.remove("light");
+        themeToggle.textContent = "☀️ Light";
+        localStorage.setItem("theme", "dark");
+      }
+    }
 
-function setTheme(mode){
-  if(mode === "light"){
-    document.body.classList.add("light");
-    toggle.textContent = "☀️ Light";
-    localStorage.setItem("theme","light");
-  }else{
-    document.body.classList.remove("light");
-    toggle.textContent = "🌙 Dark";
-    localStorage.setItem("theme","dark");
-  }
-}
+    themeToggle.addEventListener("click", () => {
+      const isLight = document.body.classList.contains("light");
+      setTheme(isLight ? "dark" : "light");
+    });
 
-toggle.addEventListener("click",()=>{
-  const isLight = document.body.classList.contains("light");
-  setTheme(isLight ? "dark" : "light");
-});
-
-const savedTheme = localStorage.getItem("theme");
-if(savedTheme){
-  setTheme(savedTheme);
-}
-
-</script>
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "light" || savedTheme === "dark") {
+      setTheme(savedTheme);
+    } else {
+      setTheme("dark");
+    }
+  </script>
 </body>
 </html>
