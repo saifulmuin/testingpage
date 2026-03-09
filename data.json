@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "generated_at": "2026-03-09 07:12:26",
+  "generated_at": "2026-03-09 07:27:11",
   "sections": [
     {
       "id": "sec-81052780",
@@ -13,6 +13,18 @@
       "title": "Social Media Content",
       "category": "SocMed",
       "order": 2
+    },
+    {
+      "id": "sec-8fe9d3ba",
+      "title": "Event & Corporate",
+      "category": "Event/Corporate",
+      "order": 3
+    },
+    {
+      "id": "sec-7563bd1a",
+      "title": "Motion Graphics",
+      "category": "Visuals",
+      "order": 4
     }
   ],
   "items": [
@@ -24,7 +36,7 @@
       "description": "Majlis Perasmian Penjenamaan Semula Pusat Mempelam Sala Kanan ke Pusat Mempelam Kedah\nRole: One man production (Write, Shoot, Edit)",
       "extra_links": [],
       "tags": [
-        "montage"
+        "Graphic Montage"
       ],
       "created_at": "2026-03-09",
       "priority": 4,
@@ -43,7 +55,7 @@
         }
       ],
       "tags": [
-        "serviceprovided"
+        "Selling Content"
       ],
       "created_at": "2026-03-09",
       "priority": 3,
@@ -62,7 +74,7 @@
         }
       ],
       "tags": [
-        "padi"
+        "Short Documentary"
       ],
       "created_at": "2026-03-09",
       "priority": 2,
@@ -81,7 +93,8 @@
         }
       ],
       "tags": [
-        "drama"
+        "Drama",
+        "Story Telling"
       ],
       "created_at": "2026-03-09",
       "priority": 1,
