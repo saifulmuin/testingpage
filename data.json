@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "generated_at": "2026-03-09 06:13:06",
+  "generated_at": "2026-03-09 06:26:34",
   "sections": [
     {
       "id": "sec-9cda9dff",
@@ -38,28 +38,8 @@
         "Aonic Flex",
         "Ansuran"
       ],
-      "created_at": "",
-      "priority": 9999,
-      "featured": false
-    },
-    {
-      "id": "vid-49f962f8",
-      "title": "(to update) Bang Chin Sifu Padi - Jadual Taburan Baja Padi yang Betul",
-      "youtube_url": "https://www.tiktok.com/@aonicagriculture/video/7387414799199603986",
-      "category": "Bang Chin",
-      "description": "456K views on TikTok",
-      "extra_links": [
-        {
-          "label": "TikTok",
-          "url": "https://www.tiktok.com/@aonicagriculture/video/7387414799199603986"
-        }
-      ],
-      "tags": [
-        "Baja",
-        "Sawah"
-      ],
-      "created_at": "2026-03-03",
-      "priority": 9999,
+      "created_at": "2026-03-09",
+      "priority": 1,
       "featured": false
     },
     {
@@ -79,7 +59,7 @@
         "Petua orang lama"
       ],
       "created_at": "2026-03-03",
-      "priority": 9999,
+      "priority": 3,
       "featured": false
     },
     {
@@ -99,7 +79,7 @@
         "Sawah"
       ],
       "created_at": "2026-03-03",
-      "priority": 9999,
+      "priority": 2,
       "featured": false
     },
     {
@@ -118,27 +98,7 @@
         "Cara Tanam Padi"
       ],
       "created_at": "2026-03-03",
-      "priority": 9999,
-      "featured": false
-    },
-    {
-      "id": "vid-945ed617",
-      "title": "Bang Chin Sifu Padi - Apa itu PEMA?",
-      "youtube_url": "https://youtu.be/uTIkvP43mWA",
-      "category": "Bang Chin",
-      "description": "243K views in TikTok",
-      "extra_links": [
-        {
-          "label": "TikTok",
-          "url": "https://www.tiktok.com/@aonicagriculture/video/7371449473970588936"
-        }
-      ],
-      "tags": [
-        "Pema",
-        "Sejarah orang dulu-dulu"
-      ],
-      "created_at": "2026-03-03",
-      "priority": 9999,
+      "priority": 1,
       "featured": false
     },
     {
