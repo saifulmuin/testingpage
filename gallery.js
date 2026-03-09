@@ -30,6 +30,63 @@
   const embedUrl = (id)=>`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
   const sanitize = (t)=>String(t ?? '').replace(/[<>]/g,'');
 
+  function getScrollAmount(scroller){
+    const firstCard = scroller.querySelector('.card');
+    if(!firstCard) return 400;
+
+    const cardWidth = firstCard.getBoundingClientRect().width;
+    const style = window.getComputedStyle(scroller);
+    const gap = parseFloat(style.columnGap || style.gap || 16) || 16;
+    return Math.round((cardWidth + gap) * 2);
+  }
+
+  function updateScrollerButtons(sectionEl){
+    const scroller = sectionEl.querySelector('.row-scroller');
+    const prevBtn = sectionEl.querySelector('.scroll-btn.prev');
+    const nextBtn = sectionEl.querySelector('.scroll-btn.next');
+    if(!scroller || !prevBtn || !nextBtn) return;
+
+    const maxScrollLeft = Math.max(0, scroller.scrollWidth - scroller.clientWidth);
+    const current = Math.round(scroller.scrollLeft);
+    const canScroll = scroller.scrollWidth > scroller.clientWidth + 8;
+    const atStart = current <= 4;
+    const atEnd = current >= maxScrollLeft - 4;
+
+    sectionEl.classList.toggle('has-scroll', canScroll);
+    prevBtn.classList.toggle('is-hidden', !canScroll || atStart);
+    nextBtn.classList.toggle('is-hidden', !canScroll || atEnd);
+  }
+
+  function bindScrollerButtons(sectionEl){
+    const scroller = sectionEl.querySelector('.row-scroller');
+    const prevBtn = sectionEl.querySelector('.scroll-btn.prev');
+    const nextBtn = sectionEl.querySelector('.scroll-btn.next');
+    if(!scroller || !prevBtn || !nextBtn) return;
+
+    const onPrev = ()=>scroller.scrollBy({ left:-getScrollAmount(scroller), behavior:'smooth' });
+    const onNext = ()=>scroller.scrollBy({ left:getScrollAmount(scroller), behavior:'smooth' });
+
+    prevBtn.addEventListener('click', onPrev);
+    nextBtn.addEventListener('click', onNext);
+    scroller.addEventListener('scroll', ()=>updateScrollerButtons(sectionEl), { passive:true });
+
+    requestAnimationFrame(()=>updateScrollerButtons(sectionEl));
+  }
+
+  function navButton(direction){
+    const cls = direction === 'prev' ? 'prev' : 'next';
+    const label = direction === 'prev' ? 'Scroll left' : 'Scroll right';
+    const path = direction === 'prev'
+      ? '<path d="M15.5 19 8.5 12l7-7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/>'
+      : '<path d="m8.5 5 7 7-7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/>';
+
+    return `
+      <button class="scroll-btn ${cls} is-hidden" type="button" aria-label="${label}">
+        <svg viewBox="0 0 24 24" aria-hidden="true">${path}</svg>
+      </button>
+    `;
+  }
+
   function renderSections(data){
     const wrap = $('#sections');
     wrap.innerHTML = '';
@@ -74,7 +131,6 @@
       if(sort === 'newest') return String(b.created_at||'').localeCompare(String(a.created_at||''));
       if(sort === 'title') return String(a.title||'').localeCompare(String(b.title||''));
 
-      // default: featured → priority → newest
       const af = a.featured ? 1 : 0;
       const bf = b.featured ? 1 : 0;
       if(bf !== af) return bf - af;
@@ -99,7 +155,11 @@
             <div class="section-sub">${list.length} video</div>
           </div>
         </div>
-        <div class="row-scroller"></div>
+        <div class="row-shell">
+          ${navButton('prev')}
+          <div class="row-scroller"></div>
+          ${navButton('next')}
+        </div>
       `;
 
       const scroller = sectionEl.querySelector('.row-scroller');
@@ -121,7 +181,7 @@
             <h3 class="title">${sanitize(item.title || 'Untitled')}</h3>
             <div class="meta">
               ${featured ? `<span class="badge">⭐ Featured</span>` : ``}
-                                        </div>
+            </div>
             <p class="desc">${sanitize(item.description || '')}</p>
             <div class="tags">
               ${tags.slice(0,6).map(t=>`<span class="tag">${sanitize(t)}</span>`).join('')}
@@ -135,6 +195,7 @@
       }
 
       wrap.appendChild(sectionEl);
+      bindScrollerButtons(sectionEl);
     }
 
     $('#count').textContent = `${total} video`;
@@ -201,6 +262,9 @@
   ['input','change'].forEach(evt=>$('#search').addEventListener(evt, rerender));
   $('#tagFilter').addEventListener('change', rerender);
   $('#sort').addEventListener('change', rerender);
+  window.addEventListener('resize', ()=>{
+    document.querySelectorAll('.section').forEach(updateScrollerButtons);
+  });
 
   $('#closeModal').addEventListener('click', closeModal);
   $('#modal').addEventListener('click', (e)=>{ if(e.target.id==='modal') closeModal(); });
