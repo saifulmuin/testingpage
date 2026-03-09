@@ -262,6 +262,17 @@ textarea{
   transition:.18s ease;
 }
 
+.item-desc{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.45;
+  display:-webkit-box;
+  -webkit-line-clamp:3;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+  word-break:break-word;
+}
+
 .row:hover{
   background:rgba(255,255,255,.05);
   border-color:rgba(124,92,255,.35);
@@ -391,6 +402,8 @@ input[type="checkbox"]{
 
   .hide-md,
   .hide-sm{
+    display:none !important;
+  .hide-lg{
     display:none !important;
   }
 }
