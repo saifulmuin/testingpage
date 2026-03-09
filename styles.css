@@ -53,8 +53,14 @@ body{
     radial-gradient(900px 600px at 90% 20%, rgba(39,211,255,.18), transparent 55%),
     radial-gradient(900px 600px at 40% 90%, rgba(255,77,109,.10), transparent 60%),
     var(--bg);
+  background-attachment: fixed;
   color:var(--text);
-  transition:background .25s ease,color .25s ease,border-color .25s ease;
+  transition:background .25s ease,color .25s ease,border-color .25s ease;  
+}
+
+body:not(.light){
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 body.light{
